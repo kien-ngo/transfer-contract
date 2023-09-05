@@ -2,7 +2,7 @@ A simplified version of thirdweb's AirdropERC721 contract used for migrating you
 
 Usage (Node.js)
 1. With gasless (very useful when you want to rescue the NFTs that are stuck in your drained wallets)
-```
+```js
 try {
   const _tokenAddress = process.env.TOKEN_ADDRESS!; //
   const migrateContractAddress = process.env.MIGRATE_CONTRACT!; // migrate erc721
