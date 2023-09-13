@@ -90,7 +90,7 @@ contract Transfer is Initializable, ERC2771ContextUpgradeable {
     }
 
     /// ERC1155
-    function migrateERC1155(
+    function transferERC1155(
         address _tokenAddress,
         address _tokenOwner,
         address _recipient,
@@ -122,10 +122,6 @@ contract Transfer is Initializable, ERC2771ContextUpgradeable {
         address _recipient,
         uint256 _amount
     ) external {
-        require(
-            _tokenAddress != 0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE,
-            "only erc20 accepted"
-        );
         IERC20(_tokenAddress).transfer(_recipient, _amount);
     }
 
@@ -136,10 +132,6 @@ contract Transfer is Initializable, ERC2771ContextUpgradeable {
         address _recipient,
         uint256 _amount
     ) external {
-        require(
-            _tokenAddress != 0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE,
-            "only erc20 accepted"
-        );
         IERC20(_tokenAddress).transferFrom(_tokenOwner, _recipient, _amount);
     }
 
